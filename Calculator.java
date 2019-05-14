@@ -7,7 +7,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import javafx.css.ParsedValue;
 
 @WebServlet("/Calculator")
 public class Calculator extends HttpServlet {
@@ -15,6 +14,13 @@ public class Calculator extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		
+
+		if (request.getParameter("x") == null || request.getParameter("x").isEmpty()
+			|| request.getParameter("y") == null || request.getParameter("y").isEmpty()) {
+			response.getWriter().print("Enter valid numbers!");
+			return;
+		}
 
 		switch (request.getParameter("Operations")) {
 
@@ -38,6 +44,7 @@ public class Calculator extends HttpServlet {
 					+ (Integer.valueOf(request.getParameter("x")) / Integer.valueOf(request.getParameter("y")) + ".")); break;
 		}
 		}
+		
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
